@@ -17,3 +17,7 @@ AUTH , Roles , Permissions using Laravel and Laratrust
 - route for admin role only to view
 - hide section in view using @ROLE to make the section able to view by admin only
 - Ban User (using soft delete)
+
+
+
+Commit 5 have problem
