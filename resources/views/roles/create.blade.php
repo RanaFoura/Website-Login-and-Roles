@@ -3,10 +3,21 @@
 @section('content')
     <div class="container">
         <div class="row">
+                    <!-- for error messages-->
+                    @if(count($errors)>0)
+                    <ul class="navbar-nav mr-auto">
+                        @foreach ($errors->all() as $error)
+                            <li class="nav-item active">
+                             {{$error}}
+                            </li>
+                        @endforeach
+                    </ul>
+                     <hr/>
+                @endif
+            <!--end error-->
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">Create Role Form</div>
-
                     <div class="card-body">
                         <form action="{{route('role.store')}}" method="POST" >
                             @csrf

@@ -23,7 +23,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name'=> 'required',
+            'name'=> 'required|unique:roles',
         ]);
 
         $namenw = preg_replace('/[^a-zA-Z0-9]/', '', $request->name);
@@ -66,7 +66,7 @@ class RoleController extends Controller
     {
 
         $this->validate($request,[
-            "name" => "required",
+            "name" => 'required|unique:roles,name,'.$id."'",
         ]);
         $role = Role::find($id);
 

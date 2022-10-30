@@ -13,26 +13,25 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('sitesettings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->softDeletes();
+            $table->string('site_name');
+            $table->text('desc');
+            $table->string('phone_number');
+            $table->string('email');
+            $table->string('address');
+            $table->string('paypal');
             $table->timestamps();
         });
-
     }
 
     /**
      * Reverse the migrations.
-     *
+     * 
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('sitesettings');
     }
 };

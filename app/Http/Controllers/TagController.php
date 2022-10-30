@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use Illuminate\Http\Request;
-use App\Models\Permission;
 
-class PermissionController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return view('permissions.index')->with('permissions',Permission::all());
+        return view('tags.index')->with('tags',Tag::all());
     }
 
     /**
@@ -24,7 +24,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('permissions.create');
+        return view('tags.create');
     }
 
     /**
@@ -35,79 +35,81 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request,[
-            'name'=> 'required|unique:permissions',
+            'name'=> 'required|unique:tags',
         ]);
 
         $namenw = preg_replace('/[^a-zA-Z0-9]/', '', $request->name);
-        $permission = Permission::create([
+        $tag = Tag::create([
             'name' => $namenw,
             'display_name' => $request->display_name, // optional
-            'description' => $request->description, // optional
+            'desc' => $request->desc, // optional
         ]);
-        return view('permissions.index')->with('permissions',Permission::all());
+        return view('tags.index')->with('tags',Tag::all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $permission= Permission::find($id);
-        return view('permissions.show')->with('permission', $permission);
+        $tag= TAg::find($id);
+        return view('tags.show')->with('tag', $tag);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $permission= Permission::find($id);
-        return view('permissions.edit')->with('permission', $permission);
+        $tag= Tag::find($id);
+        return view('tags.edit')->with('tag', $tag);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
-        $permission = Permission::find($id);
+      
+        $tag = Tag::find($request->id);
 
         $this->validate($request,[
-            "name" => 'required|unique:permissions,name,'.$id."'",
+            "name" => 'required|unique:tags,name,'.$tag->id."'",
         ]);
 
         $namenw = preg_replace('/[^a-zA-Z0-9]/', '', $request->name);
+        
+        $tag->name=$namenw;
+        $tag->display_name=$request->display_name;
+        $tag->desc=$request->desc;
+        $tag->save();
 
-        $permission->name=$namenw;
-        $permission->display_name=$request->display_name;
-        $permission->description=$request->description;
-        $permission->save();
-
-        $permission= Permission::find($id);
-        return view('permissions.show')->with('permission', $permission);
+        $tag= Tag::find($tag->id);
+        return view('tags.show')->with('tag', $tag);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $permission = Permission::find($id);
-        $permission->delete();
-        return view('permissions.index')->with('permissions',Permission::all());
+        $tag = Tag::find($id);
+        $tag->delete();
+        return view('tags.index')->with('tags',Tag::all());
     }
 }

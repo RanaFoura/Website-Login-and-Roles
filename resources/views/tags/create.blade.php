@@ -5,22 +5,21 @@
         <div class="row">
                     <!-- for error messages-->
                     @if(count($errors)>0)
-                        <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto">
                         @foreach ($errors->all() as $error)
                             <li class="nav-item active">
-                                {{$error}}
+                             {{$error}}
                             </li>
                         @endforeach
-                        </ul>
-                        <hr/>
-                    @endif
-                   <!--end error-->
+                    </ul>
+                     <hr/>
+                @endif
+            <!--end error-->
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">Create Permission Form</div>
-
+                    <div class="card-header">Create Tag</div>
                     <div class="card-body">
-                        <form action="{{ route('permission.store') }}" method="POST">
+                        <form action="{{route('tag.store')}}" method="POST" >
                             @csrf
                             <div class="form-row">
                                 <div class="col-12">
@@ -35,14 +34,14 @@
                                     </div>
                                     <br/>
                                     <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <input type="text" name="description" id="description" class="form-control" value="{{ old('description', '') }}" placeholder="Description">
+                                        <label for="desc">Description</label>
+                                        <input type="text" name="desc" id="desc" class="form-control" value="{{ old('desc', '') }}" placeholder="Description">
                                     </div>
                                 </div>
                             </div>
                             <br/>
                             <div class="text-right">
-                                <a href="{{ route('permissions.index') }}" class="btn btn-secondary">Cancel</a>
+                                <a href="{{route('tags.index')}}" class="btn btn-secondary">Cancel</a>
                                 <button class="btn btn-primary" type="submit">Submit</button>
                             </div>
                         </form>

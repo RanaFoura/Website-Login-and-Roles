@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Postype;
 use Illuminate\Http\Request;
-use App\Models\Permission;
 
-class PermissionController extends Controller
+class PostypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return view('permissions.index')->with('permissions',Permission::all());
+        return view('types.index')->with('types',Postype::all());
     }
 
     /**
@@ -24,7 +24,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('permissions.create');
+        return view('types.create');
     }
 
     /**
@@ -35,79 +35,81 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request,[
-            'name'=> 'required|unique:permissions',
+            'name'=> 'required|unique:postypes',
         ]);
 
         $namenw = preg_replace('/[^a-zA-Z0-9]/', '', $request->name);
-        $permission = Permission::create([
+        $type = Postype::create([
             'name' => $namenw,
             'display_name' => $request->display_name, // optional
-            'description' => $request->description, // optional
+            'desc' => $request->desc, // optional
         ]);
-        return view('permissions.index')->with('permissions',Permission::all());
+        return view('types.index')->with('types',Postype::all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Postype  $postype
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $permission= Permission::find($id);
-        return view('permissions.show')->with('permission', $permission);
+        $type= Postype::find($id);
+        return view('types.show')->with('type', $type);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Postype  $postype
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $permission= Permission::find($id);
-        return view('permissions.edit')->with('permission', $permission);
+        $type= Postype::find($id);
+        return view('types.edit')->with('type', $type);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Postype  $postype
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Postype $postype)
     {
-        $permission = Permission::find($id);
+        $type = Postype::find($request->id);
 
         $this->validate($request,[
-            "name" => 'required|unique:permissions,name,'.$id."'",
+            "name" => 'required|unique:postypes,name,'.$request->id."'",
         ]);
 
         $namenw = preg_replace('/[^a-zA-Z0-9]/', '', $request->name);
+        
+        $type->name=$namenw;
+        $type->display_name=$request->display_name;
+        $type->desc=$request->desc;
+        $type->save();
 
-        $permission->name=$namenw;
-        $permission->display_name=$request->display_name;
-        $permission->description=$request->description;
-        $permission->save();
-
-        $permission= Permission::find($id);
-        return view('permissions.show')->with('permission', $permission);
+        $type= Postype::find($type->id);
+        return view('types.show')->with('type', $type);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Postype  $postype
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $permission = Permission::find($id);
-        $permission->delete();
-        return view('permissions.index')->with('permissions',Permission::all());
+        $type = Postype::find($id);
+        $type->delete();
+        return view('types.index')->with('types',Postype::all());
     }
 }
+

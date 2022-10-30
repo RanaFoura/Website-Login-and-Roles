@@ -1,8 +1,13 @@
 @extends('include.header')
 
+
 @section('content')
-    <div class="container">
-        <div class="row">
+    <form action="{{ route('tag.update', $tag) }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="container">
+            <div class="row">
                     <!-- for error messages-->
                     @if(count($errors)>0)
                         <ul class="navbar-nav mr-auto">
@@ -15,40 +20,37 @@
                         <hr/>
                     @endif
                    <!--end error-->
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">Create Permission Form</div>
-
-                    <div class="card-body">
-                        <form action="{{ route('permission.store') }}" method="POST">
-                            @csrf
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">Edit Tag</div>
+                        <div class="card-body">
                             <div class="form-row">
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="name">Name <span class="required text-danger small">*</span></label>
-                                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', '') }}" placeholder="Name" required>
+                                        <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $tag->name) }}" placeholder="Name" required>
                                     </div>
                                     <br/>
                                     <div class="form-group">
                                         <label for="display_name">Display Name</label>
-                                        <input type="text" name="display_name" id="display_name" class="form-control" value="{{ old('display_name', '') }}" placeholder="Display Name">
+                                        <input type="text" name="display_name" id="display_name" class="form-control" value="{{ old('display_name', $tag->display_name) }}" placeholder="Display Name">
                                     </div>
                                     <br/>
                                     <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <input type="text" name="description" id="description" class="form-control" value="{{ old('description', '') }}" placeholder="Description">
+                                        <label for="desc">Description</label>
+                                        <input type="text" name="desc" id="desc" class="form-control" value="{{ old('desc', $tag->desc) }}" placeholder="Description">
                                     </div>
                                 </div>
                             </div>
-                            <br/>
-                            <div class="text-right">
-                                <a href="{{ route('permissions.index') }}" class="btn btn-secondary">Cancel</a>
-                                <button class="btn btn-primary" type="submit">Submit</button>
-                            </div>
-                        </form>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="text-right">
+                        <a href="{{ route('tag.show', $tag) }}" class="btn btn-secondary"><em class="fa fa-times"></em> Cancel</a>
+                        <button class="btn btn-primary" type="submit"><em class="fa fa-save"></em> Save</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 @endsection

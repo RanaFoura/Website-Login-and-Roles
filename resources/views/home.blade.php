@@ -19,6 +19,14 @@
             </div>        
         </div> --}}
 
+
+        @livewireStyles
+        <div> 
+            @livewire('user-selector')
+
+        </div>
+        @livewireScripts
+        
         <h1 class="mb-4"> Dashboard </h1>
 
         <div class="col-xl-3 col-md-6 mb-4">
@@ -129,4 +137,5 @@
         
     </div>
 </div>
+
 @endsection

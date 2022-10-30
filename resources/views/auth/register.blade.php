@@ -11,6 +11,9 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+                        <h3 class="text-danger"> General Information </h3>
+                        <hr/>
+
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
@@ -60,6 +63,11 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+
+                        <br/>
+                        <h3 class="text-danger"> Register As </h3>
+                        <hr/>
+
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

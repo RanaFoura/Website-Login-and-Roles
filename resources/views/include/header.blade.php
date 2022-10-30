@@ -12,7 +12,6 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -32,20 +31,23 @@
                     MANAGE CONTENT
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{route('posts.index')}}">Posts</a></li>
                     <li><a class="dropdown-item" href="#">Create new post</a></li>
-                    <li><a class="dropdown-item" href="#">View all posts</a></li>
                     <li><a class="dropdown-item" href="#">View deleted Posts</a></li>
                     <hr/>
-                    <li><a class="dropdown-item" href="" >Create category</a></li>     
-                    <li><a class="dropdown-item" href="">View all category</a></li>
-                        <hr/>
-                    <li><a class="dropdown-item" href="">Create new tag</a></li>   
-                    <li><a class="dropdown-item" href="">View all tags</a></li>
+                    <li><a class="dropdown-item" href="">Categories</a></li>
+                    <li><a class="dropdown-item" href="" >Create Category</a></li>     
+                    <hr/>
+                    <li><a class="dropdown-item" href="{{route('types.index')}}">Types</a></li>
+                    <li><a class="dropdown-item" href="{{route('type.create')}}" >Create Type</a></li>     
+                    <hr/>
+                    <li><a class="dropdown-item" href="{{route('tags.index')}}">Tags</a></li>
+                    <li><a class="dropdown-item" href="{{route('tag.create')}}">Create Tag</a></li>   
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    MANAGE
+                    MANAGE 
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                     <li><a class="dropdown-item" href="{{route('users.index')}}">Users</a></li>
@@ -60,8 +62,8 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link " href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    SITE SETTINGS
+                    <a class="nav-link " href="{{route('siteinfo.index')}}" >
+                    <li>SITE SETTINGS </li>
                     </a>
                 </li>
                 </ul>
@@ -79,7 +81,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
-                    PRESEC
+                    Prepared Section
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
